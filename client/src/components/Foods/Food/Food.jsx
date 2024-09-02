@@ -1,7 +1,14 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Box, Typography, Button, Stack } from '@mui/material';
+import { decrement, increment } from '../../../redux/counterSlice';
 
 function Food({ imgSrc, name, ingredients, price }) {
+    const counter = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
+    
+    
+    
     return (
         <Box sx={{
             width: 300,
@@ -26,10 +33,12 @@ function Food({ imgSrc, name, ingredients, price }) {
                 €{price.toFixed(2)}
             </Typography>
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ marginTop: 2 }}>
-                <Button variant="outlined" color="primary">
+                <Button onClick={counter === 0 ? () => {}
+                 : () => dispatch(decrement())} variant="outlined" color="primary">
                     -
                 </Button>
-                <Button variant="outlined" color="primary">
+                <span>{counter}</span>
+                <Button onClick={() => dispatch(increment())} variant="outlined" color="primary">
                     +
                 </Button>
 
