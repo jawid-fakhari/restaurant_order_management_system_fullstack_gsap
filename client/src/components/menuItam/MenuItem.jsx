@@ -5,6 +5,11 @@ import { Box, Typography, Button, Stack } from '@mui/material';
 function Food({ id, imgSrc, name, ingredients, price, callback }) {
     
     const [quantity, setQuantity] = useState(0);
+    const orderData = {
+        name: name,
+        quantity: quantity,
+        price: price
+    }
 
     const handleDecrement = () => {
         if (quantity > 0)
@@ -16,7 +21,7 @@ function Food({ id, imgSrc, name, ingredients, price, callback }) {
     // onclick button, chiama callback function e manda i dati che vogliamo
     const handleAddBtn = () => {
         if (quantity >= 1) {
-            callback(quantity, name)
+            callback(orderData)
         }
 
     }

@@ -8,6 +8,11 @@ function Menu() {
 
     const [menuItems, setMenuItems] = useState([]);
 
+    //salvare i dati di ordinazione di ogni tavolo
+    const [tableOrder, setTableOrder] = useState([]);
+
+
+
     useEffect(() => {
         //get products request
         const fetchDataFromGetAllProductsApi = async () => {
@@ -21,9 +26,17 @@ function Menu() {
         //fetch menu API
         fetchDataFromGetAllProductsApi();
     }, [])
+
     //handle add order
-    const callbackFromChildComponent = (qty, name) => {
-        console.log(qty, name)
+    const callbackFromChildComponent = (orderData) => {
+        let newOrder = tableOrder
+        newOrder.push(orderData)
+        setTableOrder(newOrder)
+    }
+    
+    //handle avvia ordine
+    const handleAvviaOrdine = (tableOrder) => {
+        console.log(tableOrder);
     }
 
 
@@ -49,7 +62,7 @@ function Menu() {
                         />
                     })}
                 </Grid2>
-                <Button>
+                <Button onClick={handleAvviaOrdine(tableOrder)}>
                     Avvia Ordine
                 </Button>
             </Container>
