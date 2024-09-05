@@ -20,7 +20,7 @@ function Menu() {
                 const response = await axios.get('http://localhost:5000/api/products', {});
                 setMenuItems(response.data);
             } catch (error) {
-                console.error('Error in getAllFriends API: ' + error);
+                console.error('Error in get all products API: ' + error);
             }
         }
         //fetch menu API

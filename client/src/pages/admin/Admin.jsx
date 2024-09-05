@@ -40,8 +40,6 @@ function Admin() {
   return (
     <>
       <Navbar />
-
-
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label>Titolo:</label>
@@ -55,7 +53,6 @@ function Admin() {
         <button>Aggingi Piatto</button>
 
       </form>
-
     </>
   )
 }

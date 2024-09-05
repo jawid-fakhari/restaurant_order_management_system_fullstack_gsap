@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Button, Typography } from '@mui/material'
 
-function TableComp() {
+function TableComp({id, tableNumber }) {
   return (
       <Box sx={{
           width: 250,
@@ -14,10 +14,10 @@ function TableComp() {
               Tavolo: {tableNumber}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ marginTop: 1 }}>
-              {state}
+              Stato
           </Typography>
           <Typography variant="h6" component="div" sx={{ marginTop: 1 }}>
-              €{amount.toFixed(2)}
+              €Amount
           </Typography>
           <Button variant="outlined" color="primary">
               Entera
