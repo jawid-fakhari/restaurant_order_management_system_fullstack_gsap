@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 //creare un modello del data per il nostro prodotto
 const ProductSchema = mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: [true, "Please entere food's name"],
     },

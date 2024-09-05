@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import styles from './admin.module.css'
 import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 
@@ -6,18 +7,34 @@ import Navbar from '../../components/navbar/Navbar'
 
 function Admin() {
 
-  const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [ingredients, setIng] = useState('');
-  const [price, setPrice] = useState(+'');
+  const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newFood = { title, ingredients, price, image };
-    axios.post('http://localhost:5000/api/products', newFood)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-
+    const newFood = { name, ingredients, price, image };
+    axios.post('http://localhost:5000/api/products', newFood, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        alert('Piatto aggiunto con successo!');
+        // Puoi anche reimpostare i campi del form
+        setName('');
+        setIng('');
+        setPrice('');
+        setImage('');
+      })
+      .catch(err => {
+        if (err.response && err.response.data && err.response.data.message) {
+          alert(`Errore: ${err.response.data.message}`);
+        } else {
+          alert('Si è verificato un errore imprevisto.');
+        }
+      });
   }
 
   return (
@@ -25,10 +42,10 @@ function Admin() {
       <Navbar />
 
 
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
 
         <label>Titolo:</label>
-        <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="text" required value={name} onChange={(e) => setName(e.target.value)} />
         <label>Ingredienti:</label>
         <input type="text" required value={ingredients} onChange={(e) => setIng(e.target.value)} />
         <label>Prezzo:</label>
