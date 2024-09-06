@@ -8,9 +8,9 @@ function Navbar() {
   return (
     <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
       <Stack spacing={2} direction="row">
-        <Link to="/menu" >
+        {/* <Link to="/menu" >
           <Button variant="contained">Menu</Button>
-        </Link>
+        </Link> */}
         <Link to="/admin">
           <Button variant="outlined">Admin</Button>
         </Link>
