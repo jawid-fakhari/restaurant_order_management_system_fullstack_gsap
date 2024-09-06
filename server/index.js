@@ -3,8 +3,8 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 // //importare il modello, si usa in POST request (che si spota in controller)
-import Product from "./models/product.model.js";
 import productRoute from "./routes/product.route.js"
+import checkoutRoute from "./routes/checkout.route.js"
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.use(cors());
 /************************************ */
 //routes, con questo route puliamo tutte le richieste portando li nel rotues folder e controllers folder
 app.use("/api/products", productRoute);
+app.use("/api/checkout", checkoutRoute);
 
 //(che si spota in routes e controller)
 //// creare GET request per i piatti già registrati (multiple products)
