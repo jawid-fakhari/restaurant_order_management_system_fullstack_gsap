@@ -23,7 +23,7 @@ function Food({ id, imgSrc, name, ingredients, price, callback }) {
         if (quantity >= 1) {
             callback(orderData)
         }
-
+        //send to server GET checkout API
     }
 
 
