@@ -1,13 +1,16 @@
 import React from 'react'
 import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 function TableComp({ id, tableNumber, onTableClick }) {
+  const navigate = useNavigate();
+
   const cliclkHandler = (e) => {
     const clickTarget = e.target.getAttribute('id');
     if (clickTarget !== 'checkout'){
-      console.log('box');
+      onTableClick(tableNumber)//callback al page Table per entrare nel menu
     }else{
-      console.log('checkout');
+      navigate(`/checkout/${tableNumber}`);
     }
   }
 

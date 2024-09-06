@@ -3,6 +3,7 @@ import Admin from "./pages/admin/Admin";
 import Menu from "./pages/menu/Menu";
 import Home from "./pages/home/Home";
 import Tables from "./pages/tables/Tables";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/tables" element={<Tables />} />
         <Route path="/menu/:tableNumber" element={<Menu />} />
+        <Route path="/checkout/:tableNumber" element={<Checkout />} />
       </Routes>
     </div>
   );

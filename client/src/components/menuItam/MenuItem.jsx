@@ -63,8 +63,6 @@ function Food({ id, imgSrc, name, ingredients, price, callback }) {
                     <Button onClick={handleAddBtn} variant="outlined" color="primary">
                         Add
                     </Button>
-
-
                 </Stack>
             </Box>
         </>

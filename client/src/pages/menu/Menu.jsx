@@ -40,6 +40,7 @@ function Menu() {
             tableNumber: tableNumber,
             orders: tableOrder,
         }
+        //questi dati vanno salvati dove? prima nello context o direttamente in db
         console.log(orderDetails);   
     }
 
@@ -65,7 +66,7 @@ function Menu() {
                 <Grid2 container spacing={2}>
                     {menuComponents}
                 </Grid2>
-                <Button onClick={handleAvviaOrdine}>
+                <Button onClick={handleAvviaOrdine} variant='outlined' color="success" sx={{ marginTop: 2 }}>
                     Avvia Ordine
                 </Button>
             </Container>
