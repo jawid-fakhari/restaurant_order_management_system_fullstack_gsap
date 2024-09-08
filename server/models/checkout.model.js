@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const CheckoutSchema = mongoose.Schema({
-  orderDetails: {
+const CheckoutSchema = mongoose.Schema(
+  {
     tableNumber: {
       type: Number,
       required: true,
@@ -23,7 +23,10 @@ const CheckoutSchema = mongoose.Schema({
       },
     ],
   },
-});
+  {
+    timestamps: true, //ci da due opzione, data del creazione e data del aggiornamento
+  }
+);
 
 const Checkout = mongoose.model("Checkout", CheckoutSchema);
 

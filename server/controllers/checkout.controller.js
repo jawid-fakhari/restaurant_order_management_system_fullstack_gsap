@@ -1,9 +1,18 @@
 import Checkout from "../models/checkout.model.js";
 
+export const getCheckouts = async (req, res) => {
+  try {
+    const checkout = await Checkout.find({});
+    res.status(200).json(checkout);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getCheckout = async (req, res) => {
   try {
     const { id } = req.params; //metodo req.params di express è un oggetto con tutti properties per evitare usare loop per trovare un property
-    const checkout = await Checkout.find(id);
+    const checkout = await Checkout.findById(id);
     res.status(200).json(checkout);
   } catch (error) {
     res.status(500).json({ message: error.message });
