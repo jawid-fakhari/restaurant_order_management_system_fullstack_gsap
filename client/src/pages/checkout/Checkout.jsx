@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar/Navbar'
 import { Box, Button, Typography } from '@mui/material'
 
 function Checkout() {
+    //**** collegare all'API di checkout per avere informazioni e renderizzarli qui
     return (
         <>
             <Navbar />

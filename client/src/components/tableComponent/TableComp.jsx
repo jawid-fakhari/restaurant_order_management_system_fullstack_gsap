@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 function TableComp({ id, tableNumber, onTableClick }) {
+  //**** devo collegare il checkout button al page di checkout
   const navigate = useNavigate();
 
   const cliclkHandler = (e) => {
