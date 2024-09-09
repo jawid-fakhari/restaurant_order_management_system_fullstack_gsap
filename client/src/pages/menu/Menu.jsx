@@ -35,13 +35,19 @@ function Menu() {
     }
 
     //handle avvia ordine
-    const handleAvviaOrdine = () => {
+    const handleAvviaOrdine = async () => {
         const orderDetails = {
             tableNumber: tableNumber,
             orders: tableOrder,
         }
-        //questi dati vanno salvati dove? prima nello context o direttamente in db
-        console.log(orderDetails);   
+        //mandare orderDetails al postCheckout 
+        await axios.post('http://localhost:5000/api/checkout', orderDetails, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => console.log('gli ordini sono stati aggiunti', response))
+            .catch((error) => console.log(error));
     }
 
     //calcolare i piatti del menu e mosrarli 
