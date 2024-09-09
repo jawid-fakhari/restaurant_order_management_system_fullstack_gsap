@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-function TableComp({ id, tableNumber, onTableClick }) {
+function TableComp({ id, tableNumber, onTableClick, amount, status }) {
   //**** devo collegare il checkout button al page di checkout
   const navigate = useNavigate();
 
@@ -31,10 +31,10 @@ function TableComp({ id, tableNumber, onTableClick }) {
         Tavolo: {tableNumber}
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ marginTop: 1 }}>
-        Stato
+        Stato: {status}
       </Typography>
       <Typography variant="h6" component="div" sx={{ marginTop: 1 }}>
-        €Amount
+        €{amount}
       </Typography>
       <Button id='checkout' variant="outlined" color="primary">
         Checkout
