@@ -3,7 +3,7 @@ import Checkout from "../models/checkout.model.js";
 export const getCheckouts = async (req, res) => {
   try {
     const checkout = await Checkout.find({});
-    res.status(200).json(checkout);
+    res.status(200).json({ checkout });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -32,20 +32,48 @@ export const postCheckout = async (req, res) => {
 export const putCheckout = async (req, res) => {
   try {
     const { id } = req.params;
-    //findByIdAndUpdate (mongoose func) trova doc con l'id, e lo aggiorna con i nuovi dati
-    const checkout = await Checkout.findByIdAndUpdate(id, req.body); //rea.body object permette di accedere al data di un json obj da parte cliente
+
+    // Trova il checkout tramite l'id e aggiorna con i nuovi dati
+    let checkout = await Checkout.findById(id);
 
     if (!checkout) {
-      return res.status(404).json({ message: "Data not found!" });
+      return res.status(404).json({ message: "Checkout not found!" });
     }
 
-    //check updated checkout
-    const updatedCheckout = await Checkout.findById(id);
+    // Aggiorna i dati del checkout
+    checkout.tableNumber = req.body.tableNumber || checkout.tableNumber;
+    checkout.orders = req.body.orders || checkout.orders;
+
+    // Calcola il nuovo totalPrice in base agli ordini aggiornati
+    checkout.totalPrice = checkout.orders.reduce((sum, order) => {
+      return sum + order.price * order.quantity;
+    }, 0);
+
+    // Salva il checkout aggiornato
+    const updatedCheckout = await checkout.save();
+
     res.status(200).json(updatedCheckout);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+// export const putCheckout = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const checkout = await Checkout.findByIdAndUpdate(id, req.params);
+
+//     if (!checkout) {
+//       return res.status(404).json({ message: "Data not found!" });
+//     }
+
+//     //check updated product
+//     const updatedCheckout = await Product.findById(id);
+//     res.status(200).json(updatedCheckout);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 export const delCheckout = async (req, res) => {
   try {
