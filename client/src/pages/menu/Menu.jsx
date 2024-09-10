@@ -50,7 +50,7 @@ function Menu() {
             .catch((error) => console.log(error));
     }
 
-    //calcolare i piatti del menu e mosrarli 
+    //mostrare tutti i piatti nel menu
     const menuComponents = menuItems.map((item, i) => {
         const { _id, name, price, ingredients, image } = item;
         return <MenuItem
