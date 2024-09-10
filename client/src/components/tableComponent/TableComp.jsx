@@ -18,7 +18,7 @@ function TableComp({ id, tableNumber, onTableClick, amount, status }) {
 
   return (
     <Box sx={{
-      width: 250,
+      width: 230,
       padding: 2,
       border: '1px solid #e0e0e0',
       borderRadius: 2,

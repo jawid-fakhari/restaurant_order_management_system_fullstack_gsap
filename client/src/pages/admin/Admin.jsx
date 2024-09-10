@@ -37,6 +37,18 @@ function Admin() {
       });
   }
 
+  //convertire/decode un immagine in Base64 
+  function convertToBase64(e){
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload=() => {
+      console.log(reader.result);
+    };
+    reader.onerror = error => {
+      console.log("Error", error);
+    }
+  }
   return (
     <>
       <Navbar />
@@ -49,7 +61,7 @@ function Admin() {
         <label>Prezzo:</label>
         <input type="text" required value={price} onChange={(e) => setPrice(e.target.value)} />
         <label>Immagine:</label>
-        <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+        <input accept='image/' type="file" value={image} onChange={convertToBase64} />
         <button>Aggingi Piatto</button>
 
       </form>

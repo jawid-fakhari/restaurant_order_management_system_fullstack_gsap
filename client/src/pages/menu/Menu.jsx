@@ -46,7 +46,7 @@ function Menu() {
                 'Content-Type': 'application/json'
             }
         })
-            .then((response) => console.log('gli ordini sono stati aggiunti', response))
+            .then((response) => alert('I tuoi ordini sono stati accolti!'))
             .catch((error) => console.log(error));
     }
 
