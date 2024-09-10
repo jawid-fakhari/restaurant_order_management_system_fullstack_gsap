@@ -25,7 +25,7 @@ function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             MIO RISTORANTE
           </Typography>
-          <Button variant='secondary' component={Link} to="/tables">Tavoli</Button>
+          <Button variant='secondary' component={Link} to="/clients">Clienti</Button>
           <Button variant='secondary' component={Link} to="/admin">Admin</Button>
         </Toolbar>
       </AppBar>

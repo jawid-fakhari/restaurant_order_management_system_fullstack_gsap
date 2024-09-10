@@ -11,7 +11,7 @@ function Tables() {
     const [tablesData, setTablesData] = useState([]); // Stato per i dati dei tavoli
 
     //il numero dei tavoli del ristorante e calcolo dei componenti
-    const tableNumbers = 10
+    const tableNumbers = 10;
     const navigate = useNavigate();
     
     useEffect(() => {

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import styles from './admin.module.css'
 import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
+import { Button, Container } from '@mui/material';
+
 
 
 
@@ -39,11 +42,10 @@ function Admin() {
 
   //convertire/decode un immagine in Base64 
   function convertToBase64(e){
-    console.log(e);
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload=() => {
-      console.log(reader.result);
+      setImage(reader.result);
     };
     reader.onerror = error => {
       console.log("Error", error);
@@ -52,6 +54,8 @@ function Admin() {
   return (
     <>
       <Navbar />
+      <Container>
+
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label>Titolo:</label>
@@ -61,10 +65,13 @@ function Admin() {
         <label>Prezzo:</label>
         <input type="text" required value={price} onChange={(e) => setPrice(e.target.value)} />
         <label>Immagine:</label>
-        <input accept='image/' type="file" value={image} onChange={convertToBase64} />
+        <input accept='image/*' type="file" onChange={convertToBase64} />
         <button>Aggingi Piatto</button>
 
       </form>
+
+      <Button variant='contained' component={Link} to="/tables">Tavoli</Button>
+      </Container>
     </>
   )
 }
