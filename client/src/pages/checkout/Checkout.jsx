@@ -4,8 +4,9 @@ import { Box, Button, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 
 function Checkout() {
-    //**** collegare all'API di checkout per avere informazioni e renderizzarli qui
-    const {tableNumber} = useParams();
+    //**** collegare all'API di checkout by id per avere informazioni e renderizzarli qui
+    //prendere tableNumber e id dal url tramite useParams
+    const { tableNumber, id } = useParams();
 
     return (
         <>
@@ -26,7 +27,7 @@ function Checkout() {
                     {/* questo si ripeterà x il numero di ordini */}
                     <p>quantità titolo: ------------------------- €€</p>
                 </div>
-                <Button id='checkout' variant="outlined" color="primary">
+                <Button variant="outlined" color="primary">
                     Chiudere il tavolo
                 </Button>
             </Box>

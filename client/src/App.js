@@ -13,7 +13,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/tables" element={<Tables />} />
         <Route path="/menu/:tableNumber" element={<Menu />} />
-        <Route path="/checkout/:tableNumber" element={<Checkout />} />
+        <Route path="/checkout/:tableNumber/:id" element={<Checkout />} />
       </Routes>
     </div>
   );

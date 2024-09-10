@@ -8,11 +8,12 @@ function TableComp({ id, tableNumber, onTableClick, amount, status }) {
 
   const cliclkHandler = (e) => {
     const clickTarget = e.target.getAttribute('id');
-    if (clickTarget !== 'checkout'){
-      onTableClick(tableNumber)//callback al page Table per entrare nel menu
-    }else{
-      navigate(`/checkout/${tableNumber}`);
-    }
+
+    clickTarget !== 'checkout' ? //se non è btn entra nel menu
+      onTableClick(tableNumber) //callback al page Table per entrare nel menu
+      : status !== 'Occupato' ? //altriment se non è occupato
+        alert('Tavolo è vuoto!') //avvisa che il tavaolo è vuoto
+        : navigate(`/checkout/${tableNumber}/${id}`); //altrimenti vai al menu page
   }
 
   return (

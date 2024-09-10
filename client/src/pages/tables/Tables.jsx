@@ -36,10 +36,10 @@ function Tables() {
         const tableData = tablesData.find(table => table.tableNumber === i + 1);// Trova i dati per il tavolo
         const amount = tableData ? tableData.totalPrice : 0; // Se non ci sono dati, imposta l'importo a 0
         const status = amount > 0 ? 'Occupato' : 'Libero'; // Se c'è un importo, il tavolo è occupato
-
+        const id = tableData ? tableData._id : -1;
         return <TableComp
             key={i}
-            id={i}
+            id={id}
             tableNumber={i + 1}
             onTableClick={handleTableClick}//passare callback func al comp.
             amount={amount}
