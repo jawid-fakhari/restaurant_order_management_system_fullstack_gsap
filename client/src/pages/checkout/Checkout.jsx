@@ -25,13 +25,12 @@ function Checkout() {
     //render tutti orders in checkout page
     const tableOrders = orders.map((order, i) => {
         const { name, quantity, price } = order;
-        return <div key={i}>
-            <p>
-                <span>{quantity} </span>
-                <span>{name} </span>
-                <span> {price} €</span>
-            </p>
-        </div>
+        return (
+            <Box key={i} sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 1 }}>
+                <Typography variant="body1">{quantity} x {name}</Typography>
+                <Typography variant="body1">{price.toFixed(2)} €</Typography>
+            </Box>
+        )
     })
 
     //button handlers
@@ -51,23 +50,28 @@ function Checkout() {
     return (
         <>
             <Navbar />
-            <Container maxWidth="sm">
+            <Container maxWidth="sm" sx={{ marginTop: 4 }}>
                 <Box sx={{
-                    width: 450,
-                    padding: 2,
+                    padding: 3,
                     border: '1px solid #e0e0e0',
                     borderRadius: 2,
                     textAlign: 'center',
-                    cursor: 'pointer'
+                    boxShadow: 3
                 }}
                 >
-                    <Typography variant="h6" component="div" sx={{ marginTop: 2 }}>
+                    <Typography variant="h6" component="div" sx={{ marginBottom: 2 }}>
                         Tavolo: {tableNumber}
                     </Typography>
-                    {/* questo si ripeterà x il numero di ordini */}
                     {tableOrders}
-                    <p>Totale: {amount} €</p>
-                    <Button onClick={closeBtn} variant="outlined" color="primary">
+                    <Typography variant="h6" sx={{ marginTop: 2 }}>
+                        Totale: {amount} €
+                    </Typography>
+                    <Button
+                        onClick={closeBtn}
+                        variant="outlined"
+                        color="error"
+                        sx={{ marginTop: 3, width: '100%' }}
+                    >
                         Chiusura
                     </Button>
                 </Box>

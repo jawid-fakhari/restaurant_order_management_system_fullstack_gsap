@@ -7,10 +7,10 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: [true, "Please entere food's name"],
     },
-    quantity: {
-      type: Number,
-      default: 0,
-    },
+    // quantity: {
+    //   type: Number,
+    //   default: 0,
+    // },
     price: {
       type: Number,
       required: true,
@@ -34,5 +34,3 @@ const ProductSchema = mongoose.Schema(
 const Product = mongoose.model("Product", ProductSchema);
 //esportare il modello
 export default Product;
-
-//questo è come si crea un modello, poi useremo questo modello per creare dei prodotti nel nostro databse

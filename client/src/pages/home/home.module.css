@@ -1,0 +1,55 @@
+*{
+  padding: 0;
+  margin: 0;
+  
+}
+.wrapper {
+    overflow: hidden;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.rightSide {
+    grid-column: 4/5;
+    background: #ea8116;
+    height: auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    align-items: start;
+}
+.adminBtn {
+    grid-column: 5;
+    grid-row: 1;
+}
+.imgBox {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 35vw;
+}
+.leftSide {
+    grid-column: 1/4;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+}
+.leftCenter {
+    grid-column: 2;
+    grid-row: 3;
+}
+.leftSide h1 {
+    font-family: 'Onsen Japan Demo';
+}
+
+.leftSide button {
+    background-color: #ea8116;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 8px 20px;
+    color: white;
+    margin-top: 20px;
+}

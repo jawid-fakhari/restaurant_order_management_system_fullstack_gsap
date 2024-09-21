@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import TableComp from '../../components/tableComponent/TableComp'
 import Navbar from '../../components/navbar/Navbar'
-import { Container, Grid2 } from '@mui/material'
+import { Container, Grid2, Typography } from '@mui/material'
 
 
 function Tables() {
@@ -15,7 +15,7 @@ function Tables() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        // Richiedi i dati dall'API
+        // Richiedi i dati del checkout per mostrarli
         axios.get('http://localhost:5000/api/checkout')
             .then(response => {
                 setTablesData(response.data.checkout);
@@ -52,8 +52,11 @@ function Tables() {
     return (
         <>
             <Navbar />
-            <Container>
-                <Grid2 container spacing={2}>
+            <Container sx={{ marginTop: 4 }}>
+                <Typography variant="h4" align="center" color="#ea8116" gutterBottom>
+                    Stato dei Tavoli
+                </Typography>
+                <Grid2 container spacing={3} justifyContent="center">
                     {tableArray}
                 </Grid2>
             </Container>

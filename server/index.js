@@ -1,23 +1,26 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import cors from 'cors';
 // //importare il modello, si usa in POST request (che si spota in controller)
-import productRoute from "./routes/product.route.js"
-import checkoutRoute from "./routes/checkout.route.js"
+import productRoute from './routes/product.route.js';
+import checkoutRoute from './routes/checkout.route.js';
+import signupRoute from './routes/signup.route.js';
+import loginRoute from './routes/login.route.js';
 
 const app = express();
 
-app.use(bodyParser.json({ limit: "30mb", extended: true })); //== app.use(express.json()) // con la differenzza che qui posso controllare il limite.
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(bodyParser.json({ limit: '30mb', extended: true })); //== app.use(express.json()) // con la differenzza che qui posso controllare il limite.
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 app.use(cors());
 
-
 /************************************ */
 //routes, con questo route puliamo tutte le richieste portando li nel rotues folder e controllers folder
-app.use("/api/products", productRoute);
-app.use("/api/checkout", checkoutRoute);
+app.use('/api/products', productRoute);
+app.use('/api/checkout', checkoutRoute);
+app.use('/api/signup', signupRoute);
+app.use('/api/login', loginRoute);
 
 //(che si spota in routes e controller)
 //// creare GET request per i piatti già registrati (multiple products)
@@ -89,18 +92,18 @@ app.use("/api/checkout", checkoutRoute);
 // });
 /************************************* */
 const CONNECTION_URL =
-  "mongodb+srv://jawidfakhari:bestRestaurantApp@restaurant-app.duaml.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Restaurant-app";
+    'mongodb+srv://jawidfakhari:bestRestaurantApp@restaurant-app.duaml.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Restaurant-app';
 
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(CONNECTION_URL)
-  .then(() =>
-    app.listen(PORT, (err, result) => {
-      if (err) console.log(err);
-      console.log(`Server is running on port ${PORT}`);
-    })
-  )
-  .catch((err) => {
-    console.log(err);
-  });
+    .connect(CONNECTION_URL)
+    .then(() =>
+        app.listen(PORT, (err, result) => {
+            if (err) console.log(err);
+            console.log(`Server is running on port ${PORT}`);
+        })
+    )
+    .catch(err => {
+        console.log(err);
+    });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';// per accedere ai parametri dell'url
 import axios from 'axios'
 import MenuItem from '../../components/menuItam/MenuItem'
-import { Button, Container, Grid2 } from '@mui/material';
+import { Button, Container, Grid2, Typography } from '@mui/material';
 import Navbar from '../../components/navbar/Navbar';
 
 function Menu() {
@@ -53,26 +53,50 @@ function Menu() {
     //mostrare tutti i piatti nel menu
     const menuComponents = menuItems.map((item, i) => {
         const { _id, name, price, ingredients, image } = item;
-        return <MenuItem
-            key={i}
-            id={_id}
-            name={name}
-            price={price}
-            ingredients={ingredients}
-            imgSrc={image}
-            callback={callbackFromChildComponent} //passare callback func al componente
-        />
+        return (
+            <Grid2 xs={12} sm={6} md={4} key={i}>
+                <MenuItem
+                    key={i}
+                    id={_id}
+                    name={name}
+                    price={price}
+                    ingredients={ingredients}
+                    imgSrc={image}
+                    callback={callbackFromChildComponent} //passare callback func al componente
+                />
+            </Grid2>
+        )
     })
 
 
     return (
         <>
             <Navbar />
-            <Container>
-                <Grid2 container spacing={2}>
-                    {menuComponents}
-                </Grid2>
-                <Button onClick={handleAvviaOrdine} variant='outlined' color="success" sx={{ marginTop: 2 }}>
+            <Container sx={{ marginTop: 4 }}>
+                <Typography variant="h4" align="left" gutterBottom>
+                    Menu
+                </Typography>
+                <Container sx={{ border: "1px solid red", display: "flex", justifyItems: "center" }}>
+
+                    <Grid2 container spacing={3}>
+                        {menuComponents}
+                    </Grid2>
+                </Container>
+                <Button
+                    onClick={handleAvviaOrdine}
+                    variant='outlined'
+                    color="success"
+                    sx={{
+                        marginTop: 3,
+                        width: '100%',
+                        height: '60px',
+                        fontSize: '1.25rem',
+                        fontWeight: 'bold',
+                        borderRadius: '8px',
+                        boxShadow: 3,
+                        marginBottom: 2
+                    }}
+                >
                     Avvia Ordine
                 </Button>
             </Container>

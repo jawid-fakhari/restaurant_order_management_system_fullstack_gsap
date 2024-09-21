@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import styles from './admin.module.css'
-import axios from 'axios'
-import Navbar from '../../components/navbar/Navbar'
-import { Button, Container } from '@mui/material';
-
-
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Navbar from '../../components/navbar/Navbar';
+import { Button, Container, TextField, Typography, Stack, Box } from '@mui/material';
 
 function Admin() {
 
@@ -14,6 +10,9 @@ function Admin() {
   const [ingredients, setIng] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [imageName, setImageName] = useState('');
+
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,57 +22,180 @@ function Admin() {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => {
+      .then(res => {//dopo post avvisa e svuota i campi
         alert('Piatto aggiunto con successo!');
-        // Puoi anche reimpostare i campi del form
         setName('');
         setIng('');
         setPrice('');
         setImage('');
+        setImageName('');
       })
       .catch(err => {
-        if (err.response && err.response.data && err.response.data.message) {
-          alert(`Errore: ${err.response.data.message}`);
-        } else {
-          alert('Si è verificato un errore imprevisto.');
-        }
+        alert('Si è verificato un errore imprevisto.');
+        console.log(err);
       });
   }
 
-  //convertire/decode un immagine in Base64 
-  function convertToBase64(e){
+  let imageUpload = '';
+  function convertToBase64(e) {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-    reader.onload=() => {
+    reader.onload = () => {
+      imageUpload = e.target.files[0].name;
+      setImageName(imageUpload);
       setImage(reader.result);
     };
     reader.onerror = error => {
       console.log("Error", error);
-    }
+    };
   }
+
+  const handleNavigate = () => {
+    navigate('/tables');
+  };
+
+  //remove isLogedIn dal localStorage
+  const handleLogout = () => {
+    window.localStorage.removeItem("isLogedIn"); // rimuovi dal local storage isLogIn 
+    navigate("/");
+  };
+
   return (
     <>
       <Navbar />
-      <Container>
+      <Container sx={{ marginTop: 4 }}>
+        
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="h4" gutterBottom color="#ea8116">
+            User: {/* qui il nome del user andra*/}
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#ea8116',
+              '&:hover': {
+                backgroundColor: '#cc6e14',
+              }
+            }}
+          onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Box>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
 
-        <label>Titolo:</label>
-        <input type="text" required value={name} onChange={(e) => setName(e.target.value)} />
-        <label>Ingredienti:</label>
-        <input type="text" required value={ingredients} onChange={(e) => setIng(e.target.value)} />
-        <label>Prezzo:</label>
-        <input type="text" required value={price} onChange={(e) => setPrice(e.target.value)} />
-        <label>Immagine:</label>
-        <input accept='image/*' type="file" onChange={convertToBase64} />
-        <button>Aggingi Piatto</button>
+        {/* Sezione per Aggiungere Piatti */}
+        <Stack
+          marginBottom={4}
+          spacing={2}
+          padding={3}
+          sx={{
+            border: 1,
+            borderRadius: 2,
+            borderColor: 'grey.500',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#fff',
+          }}
+        >
+          <Typography variant="h4" gutterBottom color="#ea8116">
+            Aggiungere Nuovi Piatti
+          </Typography>
 
-      </form>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Titolo"
+              variant="outlined"
+              fullWidth
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              label="Ingredienti"
+              variant="outlined"
+              fullWidth
+              required
+              value={ingredients}
+              onChange={(e) => setIng(e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              label="Prezzo"
+              variant="outlined"
+              fullWidth
+              required
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
 
-      <Button variant='contained' component={Link} to="/tables">Tavoli</Button>
+            <Stack direction="column" spacing={2} alignItems="flex-start">
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Button
+                  variant="outlined"
+                  component="label"
+                  sx={{ borderColor: '#ea8116', color: '#ea8116', '&:hover': { backgroundColor: '#ffe0cc' } }}
+                >
+                  Carica Immagine
+                  <input
+                    accept="image/*"
+                    type="file"
+                    hidden
+                    onChange={convertToBase64}
+                  />
+                </Button>
+                <Typography>{imageName}</Typography>
+              </Stack>
+
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  backgroundColor: '#ea8116',
+                  '&:hover': {
+                    backgroundColor: '#cc6e14',
+                  },
+                }}
+              >
+                Aggiungi Piatto
+              </Button>
+            </Stack>
+          </form>
+        </Stack>
+
+        {/* Sezione Gestione Tavoli */}
+        <Stack
+          marginBottom={2}
+          spacing={2}
+          padding={3}
+          sx={{
+            border: 1,
+            borderRadius: 2,
+            borderColor: 'grey.500',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#fff',
+          }}
+        >
+          <Typography variant="h4" component="h2" gutterBottom color="#ea8116">
+            Gestione Tavoli
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleNavigate}
+            sx={{
+              backgroundColor: '#ea8116',
+              '&:hover': {
+                backgroundColor: '#cc6e14',
+              },
+            }}
+          >
+            Vai alla gestione dei Tavoli
+          </Button>
+        </Stack>
       </Container>
     </>
-  )
+  );
 }
 
-export default Admin
+export default Admin;
